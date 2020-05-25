@@ -1,14 +1,15 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const  Menu = ( props ) => (
-  <nav>
+  <nav id="menu" >
     <div>
-      <a href='' >
+      <Link to='/' >
         User
-      </a>
-      <a href='' >
+      </Link>
+      <Link to='/task' >
         Task
-      </a>
+      </Link>
     </div>
   </nav>
 );
