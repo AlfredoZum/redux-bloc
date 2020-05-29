@@ -1,6 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import * as userActions from '../../actions/userActions';
+import Spinner from '../../general/Spinner.jsx';
+import Error from '../../general/Error.jsx';
+import TableUsers from './TableUsers.jsx';
 
 class Users extends Component {
 
@@ -8,39 +11,25 @@ class Users extends Component {
     this.props.getAll();
   }
 
-  putRows = () => (
+  putContent = () => {
 
-    this.props.users.map( ( user ) => (
-      <tr key={ user.id } >
-        <td>{user.name}</td>
-        <td>{user.email}</td>
-        <td>{user.website}</td>
-      </tr>
-    ))
+    if( this.props.loading ){
+      return <Spinner />;
+    }
 
-  );
+    if( this.props.error ){
+      return <Error error={ this.props.error } />;
+    }
+
+    return <TableUsers />
+  }
 
   render(){
+
     return (
       <div >
-        <table className="tabla" >
-          <thead>
-            <tr>
-              <th>
-                Nombre
-              </th>
-              <th>
-                Correo
-              </th>
-              <th>
-                Enlaze
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            { this.putRows() }
-          </tbody>
-        </table>
+        <h1>Hola, Lista de usuarios</h1>
+        { this.putContent() }
       </div>
     );
 
